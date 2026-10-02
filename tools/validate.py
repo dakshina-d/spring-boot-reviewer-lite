@@ -18,6 +18,9 @@ def validate():
         SKILL / 'references/report-format.md',
         ROOT / 'README.md', ROOT / 'LICENSE',
         ROOT / 'examples/sample-review.md', ROOT / 'evals/README.md',
+        ROOT / 'docs/COMPATIBILITY.md', ROOT / 'docs/TESTING.md',
+        ROOT / 'portable/spring-boot-reviewer-lite.md',
+        ROOT / 'tools/install.py', ROOT / 'tools/build_portable.py',
     ]
     for path in required:
         if not path.is_file():
@@ -41,7 +44,7 @@ def validate():
             if len(parts[2].splitlines()) >= 500:
                 errors.append('Keep SKILL.md body below 500 lines')
     for path in ROOT.rglob('*.md'):
-        if '.git' in path.parts:
+        if any(part in {'.git', '__pycache__', '.agents', '.claude', '.kiro'} for part in path.relative_to(ROOT).parts):
             continue
         for target in re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', path.read_text(encoding='utf-8')):
             if re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', target) or target.startswith('#'):
