@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spring Boot Reviewer Lite"
+  short_description: "Review Spring Boot code with evidence and clear fixes"
+  default_prompt: "Use $spring-boot-reviewer-lite to review this Spring Boot project and report evidence-backed findings."
